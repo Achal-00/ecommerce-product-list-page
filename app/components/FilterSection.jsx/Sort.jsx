@@ -28,6 +28,7 @@ const OptionContainer = styled.div`
   padding: 1rem;
   margin-top: 0.5rem;
   gap: 0.5rem;
+  z-index: 100;
 `;
 
 const Options = styled.p`

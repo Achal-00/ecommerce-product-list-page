@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { constraintContext } from "@/app/page";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -28,6 +29,7 @@ const OptionContainer = styled.div`
   padding: 1rem;
   margin-top: 0.5rem;
   gap: 0.5rem;
+  z-index: 100;
 `;
 
 const Options = styled.p`
@@ -35,6 +37,7 @@ const Options = styled.p`
 `;
 
 export default function Filter() {
+  const { constraints, setConstraints } = useContext(constraintContext);
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
@@ -54,10 +57,42 @@ export default function Filter() {
       <Options className="text-[#aaa]">Filter</Options>
       <img src="icon-arrow.svg" alt="" />
       <OptionContainer className="shadow-md hidden filter-menu">
-        <Options className="hover:font-medium">All</Options>
-        <Options className="hover:font-medium">Electronics</Options>
-        <Options className="hover:font-medium">Men</Options>
-        <Options className="hover:font-medium">Women</Options>
+        <Options
+          className="hover:font-medium"
+          onClick={() => setConstraints({ ...constraints, filter: "" })}
+        >
+          All
+        </Options>
+        <Options
+          className="hover:font-medium"
+          onClick={() =>
+            setConstraints({ ...constraints, filter: "electronics" })
+          }
+        >
+          Electronics
+        </Options>
+        <Options
+          className="hover:font-medium"
+          onClick={() => setConstraints({ ...constraints, filter: "jewelery" })}
+        >
+          Jewellery
+        </Options>
+        <Options
+          className="hover:font-medium"
+          onClick={() =>
+            setConstraints({ ...constraints, filter: "men's clothing" })
+          }
+        >
+          Men
+        </Options>
+        <Options
+          className="hover:font-medium"
+          onClick={() =>
+            setConstraints({ ...constraints, filter: "women's clothing" })
+          }
+        >
+          Women
+        </Options>
       </OptionContainer>
     </Wrapper>
   );
