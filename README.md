@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <h3 align="center">Ecommerce Product List Page</h3>
+  <h1 align="center">Ecommerce Product List Page</h1>
 
   <p align="center">
     A model page for Ecommerce product list
