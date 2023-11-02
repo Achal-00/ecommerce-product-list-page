@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Navbar from "./components/Navbar/Navbar";
 import FilterSection from "./components/FilterSection.jsx/FilterSection";
 import ProductSection from "./components/ProductSection/ProductSection";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 const Wrapper = styled.main`
   min-height: 100dvh;
@@ -27,10 +27,6 @@ export default function Home() {
     filter: "",
     sorting: "def",
   });
-
-  useEffect(() => {
-    console.log(constraints);
-  }, [constraints]);
 
   return (
     <Wrapper className="font-custom-font">
