@@ -21,6 +21,14 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex-grow: 1;
+`;
+
+const ImageHolder = styled.div`
+  width: 10rem;
+  height: 12rem;
+  position: relative;
+  margin: 0 auto;
 `;
 
 const TitleHolder = styled.div`
@@ -52,17 +60,28 @@ const Description = styled.p`
   opacity: 0.6;
 `;
 
+const CartButton = styled.button`
+  color: #fff;
+  background-color: rgb(29 78 216 / 1);
+  font-weight: 500;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.625rem 1.25rem;
+  text-align: center;
+  place-self: end;
+
+  &:hover {
+    background-color: rgb(30 64 175 / 1);
+  }
+`;
+
 export default function Card({ data }) {
   return (
     <Wrapper>
-      <div className="w-40 h-48 mx-auto relative">
-        <Image
-          src={data.image}
-          fill={true}
-          alt="product"
-          //   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-      </div>
+      <ImageHolder>
+        <Image src={data.image} fill={true} alt="product" />
+      </ImageHolder>
       <Content>
         <TitleHolder>
           <Title>{data.title}</Title>
@@ -76,6 +95,7 @@ export default function Card({ data }) {
         </PriceHolder>
         <Description>{data.description}</Description>
       </Content>
+      <CartButton>Add to Cart</CartButton>
     </Wrapper>
   );
 }

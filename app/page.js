@@ -12,6 +12,8 @@ const Wrapper = styled.main`
   flex-direction: column;
   padding: 1rem;
   gap: 2rem;
+  background: #e9e9e9;
+  color: #222222;
 
   @media (orientation: landscape) {
     padding: 1rem 4rem;
@@ -23,15 +25,15 @@ export const constraintContext = createContext();
 export default function Home() {
   const [constraints, setConstraints] = useState({
     filter: "",
-    sort: "",
+    sorting: "def",
   });
 
   useEffect(() => {
     console.log(constraints);
-  }, [constraints])
+  }, [constraints]);
 
   return (
-    <Wrapper className="bg-custom-white text-custom-black font-custom-font">
+    <Wrapper className="font-custom-font">
       <Navbar />
       <constraintContext.Provider value={{ constraints, setConstraints }}>
         <FilterSection />

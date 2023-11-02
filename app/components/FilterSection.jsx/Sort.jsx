@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { constraintContext } from "@/app/page";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -12,6 +13,11 @@ const Wrapper = styled.div`
   padding: 0 1rem;
   border-radius: 0.375rem;
   cursor: pointer;
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
+    0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 
   @media (orientation: landscape) {
     width: 16.67%;
@@ -35,7 +41,14 @@ const Options = styled.p`
   cursor: pointer;
 `;
 
+const SubOptions = styled(Options)`
+  &:hover {
+    font-weight: 600;
+  }
+`;
+
 export default function Sort() {
+  const { constraints, setConstraints } = useContext(constraintContext);
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
@@ -47,13 +60,31 @@ export default function Sort() {
   }, [menu]);
 
   return (
-    <Wrapper className="shadow-md" onClick={() => setMenu((prev) => !prev)}>
-      <Options className="text-[#aaa]">Relevance</Options>
+    <Wrapper onClick={() => setMenu((prev) => !prev)}>
+      <Options className="text-[#aaa]">
+        {constraints.sorting === "def"
+          ? "Relevance"
+          : constraints.sorting === "low"
+          ? "Lowest Price"
+          : "Highest Price"}
+      </Options>
       <img src="icon-arrow.svg" alt="" />
       <OptionContainer className="shadow-md hidden sort-menu">
-        <Options className="hover:font-medium">Relevance</Options>
-        <Options className="hover:font-medium">Price Lowest</Options>
-        <Options className="hover:font-medium">Price Highest</Options>
+        <SubOptions
+          onClick={() => setConstraints({ ...constraints, sorting: "def" })}
+        >
+          Relevance
+        </SubOptions>
+        <SubOptions
+          onClick={() => setConstraints({ ...constraints, sorting: "low" })}
+        >
+          Price Lowest
+        </SubOptions>
+        <SubOptions
+          onClick={() => setConstraints({ ...constraints, sorting: "high" })}
+        >
+          Price Highest
+        </SubOptions>
       </OptionContainer>
     </Wrapper>
   );
